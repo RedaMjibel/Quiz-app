@@ -1,10 +1,14 @@
 from app import create_app, db
-from app.models import Quiz, Question
+from app.models import Quiz, Question, User
 
 app = create_app()
 app.app_context().push()
 
 def add_initial_data():
+    # Add an admin user
+    admin_user = User(username='elbqtouri', email='elbatouri@gmail.com', password='Erabi1991', is_admin=True)
+    db.session.add(admin_user)
+    
     quiz = Quiz(title='Sample Quiz')
     db.session.add(quiz)
     questions = [
