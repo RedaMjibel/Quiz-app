@@ -14,3 +14,12 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     remember = BooleanField('Remember Me')
     submit = SubmitField('Login')
+
+class QuestionForm(FlaskForm):
+    text = StringField('Question', validators=[DataRequired()])
+    choice_a = StringField('Choice A', validators=[DataRequired()])
+    choice_b = StringField('Choice B', validators=[DataRequired()])
+    choice_c = StringField('Choice C', validators=[DataRequired()])
+    choice_d = StringField('Choice D', validators=[DataRequired()])
+    correct_answer = StringField('Correct Answer', validators=[DataRequired()])
+    submit = SubmitField('Add Question')

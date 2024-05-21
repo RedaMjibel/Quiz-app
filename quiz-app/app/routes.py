@@ -1,9 +1,9 @@
-import random
 from flask import Blueprint, render_template, redirect, url_for, flash, request
 from flask_login import current_user, login_user, logout_user, login_required
 from app import db
 from app.models import User, Quiz, Question, QuizResult
-from app.forms import RegistrationForm, LoginForm
+from app.forms import RegistrationForm, LoginForm, QuestionForm
+from app.decorators import admin_required
 
 bp = Blueprint('main', __name__)
 
@@ -63,3 +63,43 @@ def quiz(quiz_id):
         flash(f'You scored {score} out of {num_questions}', 'success')
         return redirect(url_for('main.index'))
     return render_template('quiz.html', quiz=quiz, questions=selected_questions)
+
+@bp.route('/admin')
+@login_required
+@admin_required
+def admin():
+    quizzes = Quiz.query.all()
+    return render_template('admin.html', quizzes=quizzes)
+
+@bp.route('/admin/add_question/<int:quiz_id>', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def add_question(quiz_id):
+    form = QuestionForm()
+    if form.validate_on_submit():
+        question = Question(
+            text=form.text.data,
+            choices={
+                "A": form.choice_a.data,
+                "B": form.choice_b.data,
+                "C": form.choice_c.data,
+                "D": form.choice_d.data
+            },
+            correct_answer=form.correct_answer.data,
+            quiz_id=quiz_id
+        )
+        db.session.add(question)
+        db.session.commit()
+        flash('Question added successfully!', 'success')
+        return redirect(url_for('main.admin'))
+    return render_template('add_question.html', form=form, quiz_id=quiz_id)
+
+@bp.route('/admin/delete_question/<int:question_id>', methods=['POST'])
+@login_required
+@admin_required
+def delete_question(question_id):
+    question = Question.query.get_or_404(question_id)
+    db.session.delete(question)
+    db.session.commit()
+    flash('Question deleted successfully!', 'success')
+    return redirect(url_for('main.admin'))

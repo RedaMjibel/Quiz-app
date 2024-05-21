@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Admin Panel</h2>
+    <div class="list-group">
+        {% for quiz in quizzes %}
+        <a href="{{ url_for('main.add_question', quiz_id=quiz.id) }}" class="list-group-item list-group-item-action">
+            Add Question to {{ quiz.title }}
+        </a>
+        {% for question in quiz.questions %}
+        <div class="list-group-item">
+            <strong>Question:</strong> {{ question.text }}
+            <form method="POST" action="{{ url_for('main.delete_question', question_id=question.id) }}" class="float-right">
+                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+            </form>
+        </div>
+        {% endfor %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
