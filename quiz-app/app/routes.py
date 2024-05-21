@@ -1,3 +1,4 @@
+import random
 from flask import Blueprint, render_template, redirect, url_for, flash, request
 from flask_login import current_user, login_user, logout_user, login_required
 from app import db
@@ -47,15 +48,18 @@ def logout():
 @login_required
 def quiz(quiz_id):
     quiz = Quiz.query.get_or_404(quiz_id)
+    questions = quiz.questions
+    num_questions = min(len(questions), 10)  # Adjust number of questions to sample
+    selected_questions = random.sample(questions, num_questions)  # Select random questions
     if request.method == 'POST':
         score = 0
-        for question in quiz.questions:
+        for question in selected_questions:
             user_answer = request.form.get(str(question.id))
             if user_answer == question.correct_answer:
                 score += 1
         result = QuizResult(score=score, user_id=current_user.id, quiz_id=quiz.id)
         db.session.add(result)
         db.session.commit()
-        flash(f'You scored {score} out of {len(quiz.questions)}', 'success')
+        flash(f'You scored {score} out of {num_questions}', 'success')
         return redirect(url_for('main.index'))
-    return render_template('quiz.html', quiz=quiz)
+    return render_template('quiz.html', quiz=quiz, questions=selected_questions)

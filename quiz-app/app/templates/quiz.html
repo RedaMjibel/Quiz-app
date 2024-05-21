@@ -1,20 +1,28 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>{{ quiz.title }}</h2>
-<form method="POST" action="">
-    {% for question in quiz.questions %}
-        <div>
-            <p>{{ question.text }}</p>
-            {% for key, value in question.choices.items() %}
-                <div>
-                    <input type="radio" name="{{ question.id }}" value="{{ key }}">
-                    <label>{{ key }}. {{ value }}</label>
+<div class="container mt-5">
+    <h2 class="text-center">{{ quiz.title }}</h2>
+    <form method="POST" action="">
+        {% for question in questions %}
+        <div class="card mb-3">
+            <div class="card-header">
+                <strong>Question {{ loop.index }}:</strong> {{ question.text }}
+            </div>
+            <div class="card-body">
+                {% for key, value in question.choices.items() %}
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="{{ question.id }}" id="{{ question.id }}-{{ key }}" value="{{ key }}">
+                    <label class="form-check-label" for="{{ question.id }}-{{ key }}">
+                        {{ key }}. {{ value }}
+                    </label>
                 </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
         </div>
-    {% endfor %}
-    <div>
-        <input type="submit" value="Submit">
-    </div>
-</form>
+        {% endfor %}
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+        </div>
+    </form>
+</div>
 {% endblock %}
