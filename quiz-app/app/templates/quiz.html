@@ -2,6 +2,9 @@
 {% block content %}
 <div class="container mt-5">
     <h2 class="text-center">{{ quiz.title }}</h2>
+    <div class="text-center">
+        <h5>Time Remaining: <span id="timer">1:00</span></h5>
+    </div>
     <form method="POST" action="">
         {% for question in questions %}
         <div class="card mb-3">
@@ -25,4 +28,23 @@
         </div>
     </form>
 </div>
+
+<script>
+let timer = 60; // 10 minutes in seconds
+let timerElement = document.getElementById('timer');
+
+function updateTimer() {
+    let minutes = Math.floor(timer / 60);
+    let seconds = timer % 60;
+    timerElement.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    if (timer > 0) {
+        timer--;
+    } else {
+        alert('Time is up!');
+        document.forms[0].submit();
+    }
+}
+
+setInterval(updateTimer, 1000);
+</script>
 {% endblock %}

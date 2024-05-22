@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Quiz Timeout</h2>
+    <div class="alert alert-danger text-center">
+        You have exceeded the 10-minute time limit for this quiz.
+    </div>
+    <div class="text-center">
+        <a href="{{ url_for('main.index') }}" class="btn btn-primary">Back to Home</a>
+    </div>
+</div>
+{% endblock %}

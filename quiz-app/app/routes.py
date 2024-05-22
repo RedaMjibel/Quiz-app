@@ -1,10 +1,11 @@
-import random
-from flask import Blueprint, render_template, redirect, url_for, flash, request, abort
+from datetime import datetime, timedelta
+from flask import Blueprint, render_template, redirect, url_for, flash, request, abort, session
 from flask_login import current_user, login_user, logout_user, login_required
 from app import db
 from app.models import User, Quiz, Question, QuizResult
 from app.forms import RegistrationForm, LoginForm, QuestionForm
 from app.decorators import admin_required
+import random
 
 
 bp = Blueprint('main', __name__)
@@ -111,9 +112,24 @@ def delete_question(question_id):
 @login_required
 def quiz_view(quiz_id):
     quiz = Quiz.query.get_or_404(quiz_id)
+    
+    # Check if the quiz start time is set in the session
+    if 'quiz_start_time' not in session:
+        session['quiz_start_time'] = datetime.utcnow()
+    
+    # Calculate the elapsed time
+    quiz_start_time = session['quiz_start_time']
+    time_elapsed = datetime.utcnow() - quiz_start_time
+    
+    # If the time limit is exceeded, redirect to a timeout page or result page
+    if time_elapsed > timedelta(minutes=1):
+        flash('Time is up!', 'danger')
+        return redirect(url_for('main.quiz_timeout', quiz_id=quiz.id))
+    
     questions = quiz.questions
     num_questions = min(len(questions), 10)
     selected_questions = random.sample(questions, num_questions)
+    
     if request.method == 'POST':
         score = 0
         for question in selected_questions:
@@ -125,11 +141,10 @@ def quiz_view(quiz_id):
         db.session.commit()
         flash(f'You scored {score} out of {num_questions}', 'success')
         return redirect(url_for('main.index'))
+    
     return render_template('quiz.html', quiz=quiz, questions=selected_questions)
 
-@bp.route('/quiz_results/<int:quiz_id>', methods=['GET'], endpoint='quiz_results')
+@bp.route('/quiz_timeout/<int:quiz_id>', methods=['GET'])
 @login_required
-def quiz_results(quiz_id):
-    quiz = Quiz.query.get_or_404(quiz_id)
-    results = QuizResult.query.filter_by(quiz_id=quiz_id).all()
-    return render_template('quiz_results.html', quiz=quiz, results=results)
+def quiz_timeout(quiz_id):
+    return render_template('quiz_timeout.html', quiz_id=quiz_id)
