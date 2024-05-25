@@ -40,6 +40,9 @@ def login():
             return redirect(url_for('main.index'))
         else:
             flash('Login unsuccessful. Please check email and password', 'danger')
+    else:
+        if request.method == 'POST':
+            flash('Login unsuccessful. Please check email and password', 'danger')
     return render_template('login.html', form=form)
 
 @bp.route('/logout')
