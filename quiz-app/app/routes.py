@@ -63,7 +63,10 @@ def quiz(quiz_id):
         result = QuizResult(score=score, user_id=current_user.id, quiz_id=quiz.id)
         db.session.add(result)
         db.session.commit()
-        flash(f'You scored {score} out of {num_questions}', 'success')
+        if score == 0:
+            flash(f'You scored {score} out of {num_questions}', 'danger')
+        else:
+            flash(f'You scored {score} out of {num_questions}', 'success')
         return redirect(url_for('main.index'))
     return render_template('quiz.html', quiz=quiz, questions=selected_questions)
 
