@@ -21,11 +21,15 @@ def register():
         return redirect(url_for('main.index'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data, password=form.password.data)
-        db.session.add(user)
-        db.session.commit()
-        flash('Account created successfully!', 'success')
-        return redirect(url_for('main.login'))
+        existing_user = User.query.filter((User.username == form.username.data) | (User.email == form.email.data)).first()
+        if existing_user:
+            flash('Username or email already exists. Please choose a different one.', 'danger')
+        else:
+            user = User(username=form.username.data, email=form.email.data, password=form.password.data)
+            db.session.add(user)
+            db.session.commit()
+            flash('Account created successfully!', 'success')
+            return redirect(url_for('main.login'))
     return render_template('register.html', form=form)
 
 @bp.route('/login', methods=['GET', 'POST'])
