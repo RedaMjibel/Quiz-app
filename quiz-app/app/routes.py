@@ -30,6 +30,9 @@ def register():
             db.session.commit()
             flash('Account created successfully!', 'success')
             return redirect(url_for('main.login'))
+    else:
+        if request.method == 'POST':
+            flash('Registration unsuccessful. Please check your inputs.', 'danger')
     return render_template('register.html', form=form)
 
 @bp.route('/login', methods=['GET', 'POST'])
