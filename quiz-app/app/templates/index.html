@@ -1,5 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Welcome to the Quiz App!</h1>
-<a href="{{ url_for('main.quiz', quiz_id=1) }}">Take Quiz</a>
+<div class="quiz-container">
+        <a href="{{ url_for('main.quiz', quiz_id=1) }}" class="quiz-item">
+            <div>Take Quiz 1</div>
+            <div class="quiz-theme">Theme: Mathematics</div>
+        </a>
+        <a href="{{ url_for('main.quiz', quiz_id=2) }}" class="quiz-item">
+            <div>Take Quiz 2</div>
+            <div class="quiz-theme">Theme: Geography</div>
+        </a>
+        <a href="{{ url_for('main.quiz', quiz_id=3) }}" class="quiz-item">
+            <div>Take Quiz 3</div>
+            <div class="quiz-theme">Theme: Arts</div>
+        </a>
+        <a href="{{ url_for('main.quiz', quiz_id=4) }}" class="quiz-item">
+            <div>Take Quiz 4</div>
+            <div class="quiz-theme">Theme: Sports</div>
+        </a>
+</div>
 {% endblock %}

@@ -135,3 +135,41 @@ form input[type="submit"]:hover {
     padding: 1.25rem 1rem;
     color: inherit;
 }
+
+.quiz-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.quiz-item {
+    flex: 1 1 calc(50% - 20px);
+    box-sizing: border-box;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    text-align: center;
+    background-color: #f9f9f9;
+    text-decoration: none;
+    color: #007BFF;
+    font-size: 18px;
+}
+
+.quiz-container a {
+    text-decoration: none;
+}
+
+.quiz-item:hover {
+    background-color: #e0e0e0;
+}
+.quiz-item div {
+    pointer-events: none;
+}
+
+.quiz-theme {
+    font-size: 16px;
+    color: #333;
+    font-weight: normal;
+    margin-top: 10px;
+    text-align: center;
+}
