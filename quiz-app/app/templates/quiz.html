@@ -30,7 +30,7 @@
 </div>
 
 <script>
-let timer = 60; // 10 minutes in seconds
+let timer = 60;
 let timerElement = document.getElementById('timer');
 
 function updateTimer() {
@@ -40,8 +40,9 @@ function updateTimer() {
     if (timer > 0) {
         timer--;
     } else {
-        alert('Time is up!');
-        document.forms[0].submit();
+        window.location.href = "{{ url_for('main.quiz_timeout', quiz_id=quiz.id) }}";
+        alert('Time is up! Redirecting...');
+        clearInterval(timerInterval);
     }
 }
 
