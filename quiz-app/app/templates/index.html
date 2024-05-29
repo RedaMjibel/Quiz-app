@@ -2,21 +2,25 @@
 {% block content %}
 <h1>Welcome to the Quiz App!</h1>
 <div class="quiz-container">
-        <a href="{{ url_for('main.quiz', quiz_id=1) }}" class="quiz-item">
-            <div>Take Quiz 1</div>
-            <div class="quiz-theme">Theme: Mathematics</div>
-        </a>
-        <a href="{{ url_for('main.quiz', quiz_id=2) }}" class="quiz-item">
-            <div>Take Quiz 2</div>
-            <div class="quiz-theme">Theme: Geography</div>
-        </a>
-        <a href="{{ url_for('main.quiz', quiz_id=3) }}" class="quiz-item">
-            <div>Take Quiz 3</div>
-            <div class="quiz-theme">Theme: Arts</div>
-        </a>
-        <a href="{{ url_for('main.quiz', quiz_id=4) }}" class="quiz-item">
-            <div>Take Quiz 4</div>
-            <div class="quiz-theme">Theme: Sports</div>
-        </a>
+    <a href="{{ url_for('main.quiz', quiz_id=1) }}" class="quiz-item" style="display: block; width: 200px; height: 320px; overflow: hidden;">
+        <img src="https://media.geeksforgeeks.org/wp-content/uploads/20230503013704/Mathematics-Banner.webp" alt="Mathematics Image" style="width: 80%; height: auto; max-height: 100%;" />
+        <div>Take Quiz 1</div>
+        <div class="quiz-theme">Theme: Mathematics</div>
+    </a>
+    <a href="{{ url_for('main.quiz', quiz_id=2) }}" class="quiz-item" style="display: block; width: 200px; height: 320px; overflow: hidden;">
+        <img src="https://study.com/cimages/videopreview/videopreview-full/p3c2j8y73a.jpg" alt="Mathematics Image" style="width: 80%; height: auto; max-height: 100%;" />
+        <div>Take Quiz 1</div>
+        <div class="quiz-theme">Theme: Geography</div>
+    </a>
+    <a href="{{ url_for('main.quiz', quiz_id=3) }}" class="quiz-item" style="display: block; width: 200px; height: 320px; overflow: hidden;">
+        <img src="https://kenner.kprdsb.ca/core/nodedl/79605722/123460976/86433717?xds=fileThumbnail&field=file&size=1024" alt="Mathematics Image" style="width: 80%; height: auto; max-height: 100%;" />
+        <div>Take Quiz 1</div>
+        <div class="quiz-theme">Theme: Arts</div>
+    </a>
+    <a href="{{ url_for('main.quiz', quiz_id=4) }}" class="quiz-item" style="display: block; width: 200px; height: 320px; overflow: hidden;">
+        <img src="https://myrepublica.nagariknetwork.com/uploads/media/sports_20230518163956.jpg" alt="Mathematics Image" style="width: 80%; height: auto; max-height: 100%;" />
+        <div>Take Quiz 1</div>
+        <div class="quiz-theme">Theme: Sports</div>
+    </a>
 </div>
 {% endblock %}
