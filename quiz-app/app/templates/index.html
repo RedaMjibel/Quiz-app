@@ -1,26 +1,49 @@
 {% extends "base.html" %}
+
 {% block content %}
-<h1>Welcome to the Quiz App!</h1>
-<div class="quiz-container">
-    <a href="{{ url_for('main.quiz', quiz_id=1) }}" class="quiz-item" style="display: block; width: 200px; height: 320px; overflow: hidden;">
-        <img src="https://media.geeksforgeeks.org/wp-content/uploads/20230503013704/Mathematics-Banner.webp" alt="Mathematics Image" style="width: 80%; height: auto; max-height: 100%;" />
-        <div>Take Quiz 1</div>
-        <div class="quiz-theme">Theme: Mathematics</div>
-    </a>
-    <a href="{{ url_for('main.quiz', quiz_id=2) }}" class="quiz-item" style="display: block; width: 200px; height: 320px; overflow: hidden;">
-        <img src="https://study.com/cimages/videopreview/videopreview-full/p3c2j8y73a.jpg" alt="Mathematics Image" style="width: 80%; height: auto; max-height: 100%;" />
-        <div>Take Quiz 1</div>
-        <div class="quiz-theme">Theme: Geography</div>
-    </a>
-    <a href="{{ url_for('main.quiz', quiz_id=3) }}" class="quiz-item" style="display: block; width: 200px; height: 320px; overflow: hidden;">
-        <img src="https://kenner.kprdsb.ca/core/nodedl/79605722/123460976/86433717?xds=fileThumbnail&field=file&size=1024" alt="Mathematics Image" style="width: 80%; height: auto; max-height: 100%;" />
-        <div>Take Quiz 1</div>
-        <div class="quiz-theme">Theme: Arts</div>
-    </a>
-    <a href="{{ url_for('main.quiz', quiz_id=4) }}" class="quiz-item" style="display: block; width: 200px; height: 320px; overflow: hidden;">
-        <img src="https://myrepublica.nagariknetwork.com/uploads/media/sports_20230518163956.jpg" alt="Mathematics Image" style="width: 80%; height: auto; max-height: 100%;" />
-        <div>Take Quiz 1</div>
-        <div class="quiz-theme">Theme: Sports</div>
-    </a>
+<div class="container mt-5">
+    <h1 class="text-center">Welcome to the Quiz App!</h1>
+    <div class="row mt-4">
+        <div class="col-12 col-md-6 mb-4">
+            <div class="card h-100">
+                <img src="https://i.ibb.co/VSxZNFY/Test-your-math-skills-and-challenge-yourself-with-our-ALX-FUN-quiz-mathquiz-testyourknowledge.png" class="card-img-top" alt="Mathematics Image" style="height: auto; width: 100%;">
+                <div class="card-body">
+                    <h5 class="card-title">Take Quiz 1</h5>
+                    <p class="card-text">Theme: Mathematics</p>
+                    <a href="{{ url_for('main.quiz', quiz_id=1) }}" class="btn btn-primary">Start Quiz</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 mb-4">
+            <div class="card h-100">
+                <img src="https://i.ibb.co/fHVsLyD/Explore-the-World-with-Rabi-Reda.png" class="card-img-top" alt="Geography Image" style="height: auto; width: 100%;">
+                <div class="card-body">
+                    <h5 class="card-title">Take Quiz 2</h5>
+                    <p class="card-text">Theme: Geography</p>
+                    <a href="{{ url_for('main.quiz', quiz_id=2) }}" class="btn btn-primary">Start Quiz</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 mb-4">
+            <div class="card h-100">
+                <img src="https://i.ibb.co/23k4ZLG/Test-your-art-knowledge-with-our-ALX-fun-quiz.png" class="card-img-top" alt="Arts Image" style="height: auto; width: 100%;">
+                <div class="card-body">
+                    <h5 class="card-title">Take Quiz 3</h5>
+                    <p class="card-text">Theme: Arts</p>
+                    <a href="{{ url_for('main.quiz', quiz_id=3) }}" class="btn btn-primary">Start Quiz</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 mb-4">
+            <div class="card h-100">
+                <img src="https://i.ibb.co/W2Dt910/alx-fun-quiz-by-Rab-Reda.png" class="card-img-top" alt="Sports Image" style="height: auto; width: 100%;">
+                <div class="card-body">
+                    <h5 class="card-title">Take Quiz 4</h5>
+                    <p class="card-text">Theme: Sports</p>
+                    <a href="{{ url_for('main.quiz', quiz_id=4) }}" class="btn btn-primary">Start Quiz</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
