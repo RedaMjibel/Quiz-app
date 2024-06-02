@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-
 {% block content %}
+
 <div class="container mt-5">
     <h1 class="text-center">Welcome to the Quiz App!</h1>
     <div class="row mt-4">
@@ -44,6 +44,29 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+<div class="row mt-5">
+    <div class="col-12">
+        <h2 class="text-center">Top Scorers</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Username</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rank, scorer in enumerate(top_scorers, start=1) %}
+                <tr>
+                    <td>{{ rank }}</td>
+                    <td>{{ scorer[0] }}</td>
+                    <td>{{ scorer[1] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 {% endblock %}
