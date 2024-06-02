@@ -29,6 +29,11 @@
                     <h5 class="card-title">{{ comment.name }}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{ comment.date_posted.strftime('%Y-%m-%d %H:%M') }}</h6>
                     <p class="card-text">{{ comment.message }}</p>
+                    {% if current_user.is_admin %}
+                <form method="POST" action="{{ url_for('main.delete_comment', comment_id=comment.id) }}">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            {% endif %}
                 </div>
             </div>
             {% endfor %}
