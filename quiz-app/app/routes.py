@@ -28,7 +28,7 @@ def register():
         if existing_user:
             flash('Username or email already exists. Please choose a different one.', 'danger')
         else:
-            user = User(username=form.username.data, email=form.email.data, password=form.password.data)
+            user = User(username=form.username.data, email=form.email.data, password=form.Password.data)
             db.session.add(user)
             db.session.commit()
             flash('Account created successfully!', 'success')
@@ -165,13 +165,14 @@ def quiz_view(quiz_id):
 def quiz_timeout(quiz_id):
     return render_template('quiz_timeout.html', quiz_id=quiz_id)
 
+
 @bp.route('/contact', methods=['GET', 'POST'])
+@login_required
 def contact():
     form = CommentForm()
     if form.validate_on_submit():
         comment = Comment(
             name=form.name.data,
-            email=form.email.data,
             message=form.message.data
         )
         db.session.add(comment)

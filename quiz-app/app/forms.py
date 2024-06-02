@@ -26,6 +26,5 @@ class QuestionForm(FlaskForm):
 
 class CommentForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired(), Length(min=2, max=50)])
-    email = StringField('Email', validators=[DataRequired(), Email()])
     message = TextAreaField('Message', validators=[DataRequired(), Length(min=10, max=1000)])
     submit = SubmitField('Post Comment')
