@@ -7,6 +7,7 @@ from app.forms import RegistrationForm, LoginForm, QuestionForm, CommentForm
 from app.decorators import admin_required
 import random
 from app.models import get_top_scorers
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 
@@ -28,7 +29,8 @@ def register():
         if existing_user:
             flash('Username or email already exists. Please choose a different one.', 'danger')
         else:
-            user = User(username=form.username.data, email=form.email.data, password=form.Password.data)
+            user = User(username=form.username.data, email=form.email.data, password=generate_password_hash(
+                            form.password.data, method='pbkdf2:sha256', salt_length=8))
             db.session.add(user)
             db.session.commit()
             flash('Account created successfully!', 'success')
@@ -45,7 +47,7 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
-        if user and user.password == form.password.data:
+        if user and check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             return redirect(url_for('main.index'))
         else:
