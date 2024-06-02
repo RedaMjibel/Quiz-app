@@ -126,6 +126,17 @@ def delete_question(question_id):
     flash('Question deleted successfully!', 'success')
     return redirect(url_for('main.admin'))
 
+@bp.route('/admin/delete_comment/<int:comment_id>', methods=['POST'])
+@login_required
+@admin_required
+def delete_comment(comment_id):
+    comment = Comment.query.get_or_404(comment_id)
+    db.session.delete(comment)
+    db.session.commit()
+    flash('Comment deleted successfully!', 'success')
+    return redirect(url_for('main.contact'))
+
+
 @bp.route('/quiz/<int:quiz_id>', methods=['GET', 'POST'], endpoint='quiz_view')
 @login_required
 def quiz_view(quiz_id):
