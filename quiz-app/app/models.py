@@ -1,6 +1,8 @@
 from datetime import datetime
 from flask_login import UserMixin
 from app import db, login_manager
+from sqlalchemy import func
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -32,3 +34,23 @@ class QuizResult(db.Model):
     timestamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     quiz_id = db.Column(db.Integer, db.ForeignKey('quiz.id'), nullable=False)
+
+def get_top_scorers(limit=10):
+    subquery = db.session.query(
+        QuizResult.user_id,
+        func.max(QuizResult.score).label('max_score')
+    ).group_by(QuizResult.user_id).subquery()
+
+    top_scorers = db.session.query(
+        User.username,
+        subquery.c.max_score
+    ).join(User, User.id == subquery.c.user_id).order_by(subquery.c.max_score.desc()).limit(limit).all()
+
+    return top_scorers
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(120), nullable=False)
+    message = db.Column(db.Text, nullable=False)
+    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)

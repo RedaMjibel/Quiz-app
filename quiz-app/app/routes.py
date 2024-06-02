@@ -2,10 +2,12 @@ from datetime import datetime, timedelta
 from flask import Blueprint, render_template, redirect, url_for, flash, request, abort, session
 from flask_login import current_user, login_user, logout_user, login_required
 from app import db
-from app.models import User, Quiz, Question, QuizResult
-from app.forms import RegistrationForm, LoginForm, QuestionForm
+from app.models import User, Quiz, Question, QuizResult, Comment
+from app.forms import RegistrationForm, LoginForm, QuestionForm, CommentForm
 from app.decorators import admin_required
 import random
+from app.models import get_top_scorers
+
 
 
 bp = Blueprint('main', __name__)
@@ -13,7 +15,8 @@ bp = Blueprint('main', __name__)
 @bp.route('/')
 @bp.route('/index')
 def index():
-    return render_template('index.html')
+    top_scorers = get_top_scorers()
+    return render_template('index.html', top_scorers=top_scorers)
 
 @bp.route('/register', methods=['GET', 'POST'])
 def register():
@@ -161,3 +164,19 @@ def quiz_view(quiz_id):
 @login_required
 def quiz_timeout(quiz_id):
     return render_template('quiz_timeout.html', quiz_id=quiz_id)
+
+@bp.route('/contact', methods=['GET', 'POST'])
+def contact():
+    form = CommentForm()
+    if form.validate_on_submit():
+        comment = Comment(
+            name=form.name.data,
+            email=form.email.data,
+            message=form.message.data
+        )
+        db.session.add(comment)
+        db.session.commit()
+        flash('Your comment has been posted!', 'success')
+        return redirect(url_for('main.contact'))
+    comments = Comment.query.order_by(Comment.date_posted.desc()).all()
+    return render_template('contact.html', form=form, comments=comments)
