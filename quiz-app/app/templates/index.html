@@ -1,51 +1,55 @@
 {% extends "base.html" %}
 {% block content %}
 
+        
 <div class="container mt-5">
     <h1 class="text-center">Welcome to the Quiz App!</h1>
     <div class="row mt-4">
+        <!-- Quiz 1 -->
         <div class="col-12 col-md-6 mb-4">
-            <div class="card h-100">
+            <div class="card h-100 scrolling-background">
                 <img src="https://i.ibb.co/VSxZNFY/Test-your-math-skills-and-challenge-yourself-with-our-ALX-FUN-quiz-mathquiz-testyourknowledge.png" class="card-img-top" alt="Mathematics Image" style="height: auto; width: 100%;">
                 <div class="card-body">
-                    <h5 class="card-title">Take Quiz 1</h5>
-                    <p class="card-text">Theme: Mathematics</p>
+                    <h5 class="card-title">Theme: Mathematics</h5>
+                    <p class="card-text"></p>
                     <a href="{{ url_for('main.quiz', quiz_id=1) }}" class="btn btn-primary">Start Quiz</a>
                 </div>
             </div>
         </div>
+        <!-- Repeat for other quizzes -->
         <div class="col-12 col-md-6 mb-4">
-            <div class="card h-100">
+            <div class="card h-100 scrolling-background">
                 <img src="https://i.ibb.co/fHVsLyD/Explore-the-World-with-Rabi-Reda.png" class="card-img-top" alt="Geography Image" style="height: auto; width: 100%;">
                 <div class="card-body">
-                    <h5 class="card-title">Take Quiz 2</h5>
-                    <p class="card-text">Theme: Geography</p>
+                    <h5 class="card-title">Theme: Geography</h5>
+                    <p class="card-text"></p>
                     <a href="{{ url_for('main.quiz', quiz_id=2) }}" class="btn btn-primary">Start Quiz</a>
                 </div>
             </div>
         </div>
         <div class="col-12 col-md-6 mb-4">
-            <div class="card h-100">
+            <div class="card h-100 scrolling-background">
                 <img src="https://i.ibb.co/23k4ZLG/Test-your-art-knowledge-with-our-ALX-fun-quiz.png" class="card-img-top" alt="Arts Image" style="height: auto; width: 100%;">
                 <div class="card-body">
-                    <h5 class="card-title">Take Quiz 3</h5>
-                    <p class="card-text">Theme: Arts</p>
+                    <h5 class="card-title">Theme: Arts</h5>
+                    <p class="card-text"></p>
                     <a href="{{ url_for('main.quiz', quiz_id=3) }}" class="btn btn-primary">Start Quiz</a>
                 </div>
             </div>
         </div>
         <div class="col-12 col-md-6 mb-4">
-            <div class="card h-100">
+            <div class="card h-100 scrolling-background">
                 <img src="https://i.ibb.co/W2Dt910/alx-fun-quiz-by-Rab-Reda.png" class="card-img-top" alt="Sports Image" style="height: auto; width: 100%;">
                 <div class="card-body">
-                    <h5 class="card-title">Take Quiz 4</h5>
-                    <p class="card-text">Theme: Sports</p>
+                    <h5 class="card-title">Theme: Sports</h5>
+                    <p class="card-text"></p>
                     <a href="{{ url_for('main.quiz', quiz_id=4) }}" class="btn btn-primary">Start Quiz</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <div class="row mt-5">
     <div class="col-12">
         <h2 class="text-center">Top Scorers</h2>
@@ -69,4 +73,5 @@
         </table>
     </div>
 </div>
+
 {% endblock %}
