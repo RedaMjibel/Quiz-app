@@ -173,3 +173,34 @@ form input[type="submit"]:hover {
     margin-top: 10px;
     text-align: center;
 }
+
+    body {
+        background: url('https://i.ibb.co/W2Dt910/alx-fun-quiz-by-Rab-Reda.png') no-repeat center center fixed;
+        background-size: cover;
+    }
+
+    .scrolling-background {
+        animation: scrollBackground 20s linear infinite;
+    }
+
+    @keyframes scrollBackground {
+        0% {
+            background-position: 0% 50%;
+        }
+        100% {
+            background-position: 100% 50%;
+        }
+    }
+
+    .card {
+        transition: transform 0.2s;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+    }
+
+    /* Ensure content container can scroll */
+    .container {
+        overflow-y: auto;
+    }
