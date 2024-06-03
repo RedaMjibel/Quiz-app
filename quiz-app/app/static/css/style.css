@@ -1,9 +1,14 @@
 /* General styles */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
 }
 
 .container {
@@ -13,6 +18,17 @@ body {
     background: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    flex: 1;
+}
+
+/* Footer styles */
+.footer {
+    background: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
+    margin-top: 50px;
 }
 
 /* Navigation styles */
@@ -21,6 +37,7 @@ nav {
     color: #fff;
     padding: 10px 0;
     text-align: center;
+    width: 100%;
 }
 
 nav a {
@@ -162,6 +179,7 @@ form input[type="submit"]:hover {
 .quiz-item:hover {
     background-color: #e0e0e0;
 }
+
 .quiz-item div {
     pointer-events: none;
 }
@@ -174,33 +192,28 @@ form input[type="submit"]:hover {
     text-align: center;
 }
 
-    body {
-        background: url('https://i.ibb.co/W2Dt910/alx-fun-quiz-by-Rab-Reda.png') no-repeat center center fixed;
-        background-size: cover;
-    }
+body {
+    background: url('blue-red-wallpaper.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
 
-    .scrolling-background {
-        animation: scrollBackground 20s linear infinite;
-    }
+.scrolling-background {
+    animation: scrollBackground 20s linear infinite;
+}
 
-    @keyframes scrollBackground {
-        0% {
-            background-position: 0% 50%;
-        }
-        100% {
-            background-position: 100% 50%;
-        }
+@keyframes scrollBackground {
+    0% {
+        background-position: 0% 50%;
     }
+    100% {
+        background-position: 100% 50%;
+    }
+}
 
-    .card {
-        transition: transform 0.2s;
-    }
+.card {
+    transition: transform 0.2s;
+}
 
-    .card:hover {
-        transform: scale(1.05);
-    }
-
-    /* Ensure content container can scroll */
-    .container {
-        overflow-y: auto;
-    }
+.card:hover {
+    transform: scale(1.05);
+}
