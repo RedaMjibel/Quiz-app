@@ -210,12 +210,12 @@ body {
     }
 }
 
-.card {
-    transition: transform 0.2s;
+.my_hover {
+    transition: transform 0.2s ease-in-out;
 }
 
 
-.card:hover {
+.my_hover:hover {
     transform: scale(1.05);
 }
 
