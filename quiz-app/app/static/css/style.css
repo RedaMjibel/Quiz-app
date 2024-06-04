@@ -23,7 +23,7 @@ body {
 
 /* Footer styles */
 .footer {
-    background: #333;
+    background: #ffffff;
     color: #fff;
     padding: 10px 0;
     text-align: center;
@@ -124,7 +124,7 @@ form input[type="submit"]:hover {
 
 /* Custom styles for the quiz page */
 .card-header {
-    background-color: #f8f9fa;
+    background-color: #ffffff;
 }
 
 .card-body {
@@ -141,7 +141,7 @@ form input[type="submit"]:hover {
 }
 
 .btn-primary:hover {
-    background-color: #0056b3;
+    background-color: #001e6a;
     border-color: #0056b3;
 }
 
@@ -214,10 +214,15 @@ body {
     transition: transform 0.2s;
 }
 
+
 .card:hover {
     transform: scale(1.05);
 }
 
 .mb-0 {
     color:#333;
+}
+
+.container {
+    margin-top: 20px;
 }
