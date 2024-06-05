@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">{{ quiz.title }}</h2>
+    <div class="text-center">
+        <h5>Time Remaining: <span id="timer">1:00</span></h5>
+    </div>
+    <form method="POST" action="">
+        {% for question in questions %}
+        <div class="card mb-2">
+            <div class="card-header">
+                <strong>Question {{ loop.index }}:</strong> {{ question.text }}
+            </div>
+            <div class="card-body">
+                {% for key, value in question.choices.items() %}
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="{{ question.id }}" id="{{ question.id }}-{{ key }}" value="{{ key }}">
+                    <label class="form-check-label" for="{{ question.id }}-{{ key }}">
+                        {{ key }}. {{ value }}
+                    </label>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+        </div>
+    </form>
+</div>
+
+<script>
+let timer = 60;
+let timerElement = document.getElementById('timer');
+
+function updateTimer() {
+    let minutes = Math.floor(timer / 60);
+    let seconds = timer % 60;
+    timerElement.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    if (timer > 0) {
+        timer--;
+    } else {
+        window.location.href = "{{ url_for('main.quiz_timeout', quiz_id=quiz.id) }}";
+        alert('Time is up! Redirecting...');
+        clearInterval(timerInterval);
+    }
+}
+
+setInterval(updateTimer, 1000);
+</script>
+{% endblock %}
