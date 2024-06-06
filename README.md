@@ -1,36 +1,129 @@
-<h1 class="gap">
-    Webstack -  Portfolio Project
-    
-  </h1>
-  <h3>Interactive Quiz Application:</h3>
+# Flask Quiz Application
 
-<h4>Tech Stack:</h4>
+This is a web-based quiz application built using Flask. It allows users to register, login, take quizzes, view their scores, and post comments. Administrators can manage quizzes and questions.
 
-<p>Python (Flask/Django), HTML, CSS</p>
+## Features
 
-<h4>Description:</h4>
+- User registration and authentication
+- Admin dashboard for managing quizzes and questions
+- Taking quizzes with a time limit
+- Viewing top scorers
+- Posting and managing comments
+- Caching with Redis for improved performance
 
-<p>Create a quiz application where users can answer multiple-choice questions. Implement scoring, time limits, and feedback. This project will reinforce Python programming skills and web development basics.</p>
+## Prerequisites
 
-<h4>Milestones:</h4>
+- Python 3.x
+- Redis
+- A database (e.g., PostgreSQL, MySQL, SQLite)
 
-<ul>
-  <li>Auth system/Session management</li>
-  <li>Storage of quiz results under user accounts (This means you need to setup db storage for your application)</li>
-  <li>Make application responsive</li>
-  <li>Bonus: Design your code so that you’re able to add new sets of quiz questions</li>
-  <li>Bonus: Expose your quiz questions in the form of a REST API</li>
-</ul>
-  <h3>GO!</h3>
+## Setup Instructions
 
-<p>Yes it&rsquo;s time to white-board, to code, to troubleshoot bugs, to re-code, to solve other bugs, to refactor, etc..</p>
+1. **Clone the Repository**:
+    ```sh
+    git clone https://github.com/yourusername/quiz-app.git
+    cd quiz-app
+    ```
 
-<p>Development is not a long quiet river, but it can be really fun!</p>
+2. **Create a Virtual Environment**:
+    ```sh
+    python -m venv venv
+    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+    ```
 
-<p>Starting today, you are building <strong>YOUR</strong> project - be proud of it!</p>
+3. **Install Dependencies**:
+    ```sh
+    pip install -r requirements.txt
+    ```
 
-<h2>Evaluation - Show off!</h2>
+4. **Configure the Application**:
+    - Edit the `config.py` file to set your database URI and other configurations:
+    ```python
+    class Config:
+        SECRET_KEY = 'your_secret_key'
+        SQLALCHEMY_DATABASE_URI = 'your_database_uri'
+        SQLALCHEMY_TRACK_MODIFICATIONS = False
+        CACHE_TYPE = 'RedisCache'
+        CACHE_REDIS_URL = 'redis://localhost:6379/0'
+    ```
 
-<p>After the pitch, now you will code - nice right? but don&rsquo;t forget you will present it at the end (the Peer Learning Day following this project) in front of professionals and staff.</p>
+5. **Set Up the Database**:
+    ```sh
+    flask db init
+    flask db migrate -m "Initial migration"
+    flask db upgrade
+    ```
 
-<p>Have fun!</p>
+6. **Run the Application**:
+    ```sh
+    flask run
+    ```
+
+7. **Access the Application**:
+    Open your web browser and navigate to `http://127.0.0.1:5000/`.
+
+## Usage
+
+### User Registration and Login
+
+1. Navigate to the registration page and create an account.
+2. Login using your credentials.
+3. Access quizzes and view your scores.
+
+### Admin Dashboard
+
+1. Login as an admin user.
+2. Access the admin dashboard to manage quizzes and questions.
+
+### Taking Quizzes
+
+1. Select a quiz from the homepage.
+2. Answer the questions within the time limit.
+3. Submit your answers and view your score.
+
+### Posting Comments
+
+1. Navigate to the contact page.
+2. Fill in your name and message.
+3. Submit the comment.
+
+## Reusing the Project
+
+For programmers who want to reuse or contribute to this project:
+
+1. **Clone the Repository**:
+    ```sh
+    git clone https://github.com/yourusername/quiz-app.git
+    cd quiz-app
+    ```
+
+2. **Create a Virtual Environment**:
+    ```sh
+    python -m venv venv
+    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+    ```
+
+3. **Install Dependencies**:
+    ```sh
+    pip install -r requirements.txt
+    ```
+
+4. **Set Up the Database**:
+    ```sh
+    flask db init
+    flask db migrate -m "Initial migration"
+    flask db upgrade
+    ```
+
+5. **Run the Application**:
+    ```sh
+    flask run
+    ```
+
+## Contributing
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/your-feature-name`).
+3. Commit your changes (`git commit -am 'Add some feature'`).
+4. Push to the branch (`git push origin feature/your-feature-name`).
+5. Create a new Pull Request.
