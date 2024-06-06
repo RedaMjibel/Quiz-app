@@ -14,7 +14,6 @@ This is a web-based quiz application built using Flask. It allows users to regis
 ## Prerequisites
 
 - Python 3.x
-- Redis
 - A database (e.g., PostgreSQL, MySQL, SQLite)
 
 ## Setup Instructions
